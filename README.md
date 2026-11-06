@@ -47,3 +47,140 @@ Classification Layer
 Breed Prediction
         ↓
 Confidence Score
+
+Model Performance
+  Metric                  Result
+  Training Accuracy       98.27%
+Validation Accuracy     97.50%
+Test Accuracy           96.83%
+Test Loss               0.1126
+
+These are the project's reported evaluation results. Performance may
+vary on images outside the test dataset.
+Model Experimentation
+  Model             Validation Accuracy Role
+  MobileNetV2     Approximately 68--70% Initial experiment
+ResNet18                       97.50% Selected final model
+
+ResNet18 was selected because it achieved higher validation accuracy on
+the project's dataset.
+Confidence Threshold
+The application uses a 95% confidence threshold: - Confidence ≥
+95%: The prediction is eligible to be displayed as a valid result. -
+Confidence < 95%: A low-confidence message is displayed, asking the
+user to upload a clearer image or try another image.
+
+A confidence score is not a guarantee that a prediction is correct.
+
+# 🔄 Application Workflow
+
+             User
+              |
+              v
+       React.js Frontend
+              |
+              v
+          Image Upload
+              |
+              v
+       FastAPI Backend
+              |
+              v
+       Image Preprocessing
+              |
+              v
+          ResNet18 Model
+              |
+              v
+       Breed Prediction
+              |
+              v
+       Confidence Check
+              |
+       +------+------+
+       |             |
+   Valid Result   Low Confidence
+       |             |
+       v             v
+ Breed and       Retry Message
+ Disease Info
+       |
+       v
+ PDF Report / Prediction History
+       |
+       v
+    Neon PostgreSQL
+
+🏗️ Technology Stack
+  Category               Technologies
+  Frontend               React.js, Tailwind CSS, Axios
+Backend                Python, FastAPI
+Deep Learning          PyTorch, Torchvision, ResNet18
+Data Processing        NumPy, Pillow
+Database               PostgreSQL, Neon
+PDF Generation         ReportLab
+Internationalization   react-i18next
+Model Development      Google Colab
+Development Tools      VS Code, Git, GitHub
+Deployment             Vercel, Render, Neon
+
+Dataset Split
+  Dataset           Images
+  Training           4,795
+Validation           599
+Testing              600
+Total      5,994
+
+Explore the Gomitra AI UI/UX:
+
+[View Gomitra AI  User Interface and Features](YOUR_FIGMA_)
+
+⚠️ Limitations
+- The current model supports only the 10 classes listed above.
+- Prediction quality depends on image clarity, lighting, and cattle
+  visibility.
+- Breeds outside the trained classes may be classified as one of the
+  supported classes.
+- A high confidence score does not guarantee a correct prediction.
+- The web application requires internet
+
+
+🚀 Future Enhancements
+- Expand the dataset to include more Indian cattle breeds.
+- Explore cattle disease detection.
+- Add real-time camera-based identification.
+- Develop a dedicated mobile application.
+- Explore offline inference.
+- Add a Kannada voice assistant.
+- Improve robustness using larger and more diverse datasets.
+
+
+1. Clone the Repository
+git clone https://github.com/manojhc2004/GomitraAI.git
+cd GomitraAI
+
+2. Backend Setup
+cd backend
+python -m venv venv
+Activate the environment on Windows:
+venv\Scripts\activate
+
+Install dependencies:
+pip install -r requirements.txt
+Create a .env file in the backend directory and configure the database
+
+connection:
+DATABASE_URL=your_neon_postgresql_connection_string
+Add any other environment variables required by your project
+configuration. Never commit real credentials or API keys.
+
+Start the backend:
+uvicorn app.main:app --reload --port 8000
+
+3. Frontend Setup
+Open another terminal:
+cd frontend
+npm install
+npm run dev
+Use the frontend URL printed by the development server. Ensure the
+frontend API configuration points to the running backend.
