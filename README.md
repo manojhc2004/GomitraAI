@@ -159,7 +159,7 @@ PDF Report / Prediction History
 
 Explore the Gomitra AI UI/UX design and application features:
 
-**[View Gomitra AI User Interface and Features](click_here)**
+**[View Gomitra AI User Interface and Features](frontend/.figma/attachments)**
 
 ---
 
